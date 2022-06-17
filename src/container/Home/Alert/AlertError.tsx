@@ -1,17 +1,22 @@
-import * as React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
-import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
 
 export default function TransitionAlertsError() {
   const [open, setOpen] = useState(true);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box
+      sx={{
+        width: "160px",
+        position: "absolute",
+        display: "inline-block",
+        marginLeft: "100px",
+      }}
+    >
       <Collapse in={open}>
         <Alert
           severity="error"
@@ -27,7 +32,6 @@ export default function TransitionAlertsError() {
               <CloseIcon fontSize="inherit" />
             </IconButton>
           }
-          sx={{ mb: 2 }}
         >
           Error
         </Alert>

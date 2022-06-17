@@ -1,5 +1,5 @@
-import useStyles from "./style";
 import LoadingButton from "@mui/lab/LoadingButton";
+import useStyles from "./style";
 
 function Loading() {
   const classes = useStyles();

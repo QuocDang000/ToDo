@@ -5,13 +5,10 @@ export const deleteTask = async (id: any) => {
   {
     headers: {
       "Content-Type": "application/json",
-      Authorization:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjFlNWIyMmJlMzcyZTAwMTc3ZWJiNDEiLCJpYXQiOjE2NTUwOTMyOTd9._Fz0LQntFEz0brj3AV_-FCXAo_AWDbuQ9P01ZxQTFKI",
+      Authorization: localStorage.token,
     },
   }
   );
-
-  console.log("RES", res.data.success);
   
   return res;
 }

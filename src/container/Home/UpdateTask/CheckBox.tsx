@@ -1,48 +1,48 @@
-import * as React from 'react';
-import Checkbox from '@mui/material/Checkbox';
-import { updateTask } from './until';
-import TransitionAlertsSuccess from '../Alert/AlertSuccess';
+import * as React from "react";
+import Checkbox from "@mui/material/Checkbox";
+import { updateTask } from "./until";
 
-export default function ControlledCheckbox({id , status}: any) {
-  // const { id , status } = props
-  const [checked, setChecked] = React.useState(false);  
-  const [success, setSuccess] = React.useState(false)
-  // const [status, setStatus] = React.useState(status)
-  console.log("status1", status);
-  
+export default function ControlledCheckbox({
+  id,
+  status,
+  onUpdatePost,
+  posts,
+}: any) {
+  const [checked, setChecked] = React.useState(status);
 
-  const handleClick = async () => {
-    if(status === false){
-      status = true
-    }
+  const handleChangeCheckBox = async (e) => {
+    setChecked(e.target.checked);
+
+    const newPosts = posts.map(post => {
+      if (post._id === id) {
+        if (post.completed === false) {
+          post.completed = true 
+          status = post.completed 
+        } else {
+          post.completed = false 
+          status = post.completed
+        }
+        console.log("abcd");
+      } 
+      return post
+    });
     
+    onUpdatePost(newPosts);
     try {
-      const response = await updateTask(id, status);
-      // setStatus(true)
-      setSuccess(true)
-    
-      console.log("response file index", response);
-      // console.log('id' ,id);
-      // console.log('stt', status)
-      
+      await updateTask(id, status);
     } catch (error) {
-      console.log('error', error);
+      console.log("error", error);
     }
-
-    setChecked(true)
+    console.log("statusss", status);
   };
 
   return (
     <div>
-   <Checkbox
-      checked={status || checked}
-      onClick={handleClick}
-      // onChange={handleChange}
-      inputProps={{ 'aria-label': 'controlled' }}
-    />
-
-    {success && <p>Success</p>}
+      <Checkbox
+        checked={checked}
+        onChange={handleChangeCheckBox}
+        inputProps={{ "aria-label": "controlled" }}
+      />
     </div>
- 
   );
 }
